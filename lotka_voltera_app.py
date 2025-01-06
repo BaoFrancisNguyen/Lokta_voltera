@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from lotka_voltera_functions import load_csv_data, calculate_mse
 
 
 # valeurs proportionnelles à la population de proies et de prédateurs

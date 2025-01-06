@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from lotka_voltera_app import time, rabbit, fox
 
 
 # Fonction pour charger les données réelles depuis un fichier CSV

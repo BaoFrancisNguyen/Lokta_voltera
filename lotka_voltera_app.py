@@ -1,5 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+
+# Fonction pour charger les données réelles depuis un fichier CSV
+def load_csv_data(file_path):
+    data = pd.read_csv(file_path)
+    return data['Time'], data['Prey'], data['Predator']
 
 # valeurs proportionnelles à la population de proies et de prédateurs
 rabbit = [1]

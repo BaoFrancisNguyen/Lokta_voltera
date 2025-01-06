@@ -14,6 +14,10 @@ gamma = 1
 delta = 1
 step = 0.01
 
+# Charger les données réelles à partir du fichier CSV
+csv_file_path = 'populations_lapins_renards.csv'  # Remplacez par le chemin correct si nécessaire
+time_real, prey_real, predator_real = load_csv_data(csv_file_path)
+
 #approximation of the differential equation
 for _ in range(0, 100_000):
     new_time_value = time[-1]

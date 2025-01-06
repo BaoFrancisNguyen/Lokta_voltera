@@ -18,6 +18,11 @@ step = 0.01
 csv_file_path = 'populations_lapins_renards.csv'  # Remplacez par le chemin correct si nécessaire
 time_real, prey_real, predator_real = load_csv_data(csv_file_path)
 
+### Comparer les données simulées aux données réelles
+# Convertir les données simulées en numpy array
+simulated_prey = np.array(rabbit) * 1000
+simulated_predator = np.array(fox) * 1000  
+
 #approximation of the differential equation
 for _ in range(0, 100_000):
     new_time_value = time[-1]

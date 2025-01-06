@@ -1,26 +1,22 @@
 import numpy as np
-from itertools import product
-
-# Fonction pour résoudre les équations de Lotka-Volterra avec l'algorithme d'Euler
-def lotka_volterra(alpha, beta, gamma, delta, prey_init, predator_init, dt, t_max):
-
-    #initialisation des variables
-    time_steps = int(t_max / dt)
-    prey = np.zeros(time_steps)
-    predator = np.zeros(time_steps)
-    prey[0], predator[0] = prey_init, predator_init
-    #résolution des équations de Lotka-Volterra avec l'algorithme d'Euler
+import pandas as pd
 
 
-    for time in range(1, time_steps):
-        
-        prey[time] = prey[time-1] + dt * (alpha * prey[time-1] - beta * prey[time-1] * predator[time-1])
-        predator[time] = predator[time-1] + dt * (delta * prey[time-1] * predator[time-1] - gamma * predator[time-1])
-    
-    return prey, predator
+# Fonction pour charger les données réelles depuis un fichier CSV
+def load_csv_data(file_path):
+    data = pd.read_csv(file_path)
+    return data['Time'], data['Prey'], data['Predator']
 
 # Fonction pour calculer la MSE
-def mse(observed_prey, observed_predator, simulated_prey, simulated_predator):
+# on utilise le carré de la différence entre les valeurs réelles et les valeurs simulées pour obtenir une valeur positive
 
-    return np.mean((observed_prey - simulated_prey)**2 + (observed_predator - simulated_predator)**2)
+def calculate_mse(real_prey, real_predator, simulated_prey, simulated_predator):
+    # on calcule la moyenne des carrés des différences
+    mse_prey = np.mean((real_prey - simulated_prey) ** 2)
+    mse_predator = np.mean((real_predator - simulated_predator) ** 2)
+    
+    return mse_prey, mse_predator
 
+# Charger un fichier CSV
+csv_file_path = input("populations_lapins_renards.csv")
+time_real, prey_real, predator_real = load_csv_data(csv_file_path)

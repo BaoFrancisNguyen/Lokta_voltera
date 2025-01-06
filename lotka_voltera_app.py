@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import numpy as np
+
 # valeurs proportionnelles à la population de proies et de prédateurs
 rabbit = [1]
 fox = [2]
@@ -19,9 +21,17 @@ for _ in range(0, 100_000):
     fox.append(new_fox_value)
     time.append(new_time_value + step)
 
+lapin = np.array(rabbit)
+renard = np.array(fox)
+
+lapin *= 1000
+renard *= 1000
+
 
 plt.figure(figsize=(15, 6))
 plt.plot(time, rabbit, label='Rabbit', color='blue')
 plt.plot(time, fox, label='Fox', color='red')
-plt.legend(' évolution de la population de proies et de prédateurs')
+plt.xlabel('Time')
+plt.ylabel('Population')
+plt.legend()
 plt.show()

@@ -6,7 +6,7 @@ from lotka_voltera_functions import load_csv_data, calculate_mse
 
 # valeurs proportionnelles à la population de proies et de prédateurs
 rabbit = [1]
-fox = [2]
+fox = [1]
 time =[0]
 alpha = 2/3
 beta = 4/3
@@ -15,7 +15,7 @@ delta = 1
 step = 0.01
 
 # Charger les données réelles à partir du fichier CSV
-csv_file_path = 'populations_lapins_renards.csv'  # Remplacez par le chemin correct si nécessaire
+csv_file_path = 'populations_lapins_renards.csv'
 time_real, prey_real, predator_real = load_csv_data(csv_file_path)
 
 ### Comparer les données simulées aux données réelles

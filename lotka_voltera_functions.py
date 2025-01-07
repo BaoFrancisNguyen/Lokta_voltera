@@ -1,28 +1,30 @@
 import numpy as np
 import pandas as pd
-from lotka_voltera_app import time, rabbit, fox
 
+
+
+import numpy as np
+import pandas as pd
 
 # Fonction pour charger les données réelles depuis un fichier CSV
 def load_csv_data(file_path):
     try:
         data = pd.read_csv(file_path)
+        
         # Vérifie que les colonnes nécessaires sont présentes
-        if 'Time' in data.columns and 'Prey' in data.columns and 'Predator' in data.columns:
-            return data['Time'].values, data['Prey'].values, data['Predator'].values
+        if 'date' in data.columns and 'lapin' in data.columns and 'renard' in data.columns:
+            return data['date'].values, data['lapin'].values, data['renard'].values
         else:
-            raise ValueError("Le fichier CSV doit contenir les colonnes 'Time', 'Prey', et 'Predator'.")
+            raise ValueError("Le fichier CSV doit contenir les colonnes 'date', 'lapin', et 'renard'.")
     except Exception as e:
         raise IOError(f"Erreur lors du chargement du fichier CSV : {e}")
 
 # Fonction pour calculer la MSE
-# on utilise le carré de la différence entre les valeurs réelles et les valeurs simulées pour obtenir une valeur positive
-
-# Fonction pour calculer la MSE
-def calculate_mse(real_prey, real_predator, simulated_prey, simulated_predator):
+def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
     try:
-        mse_prey = np.mean((real_prey - simulated_prey) ** 2)
-        mse_predator = np.mean((real_predator - simulated_predator) ** 2)
-        return mse_prey, mse_predator
+        mse_lapin = np.mean((real_lapin - simulated_lapin) ** 2)
+        mse_renard = np.mean((real_renard - simulated_renard) ** 2)
+        return mse_lapin, mse_renard
     except Exception as e:
         raise ValueError(f"Erreur dans le calcul du MSE : {e}")
+

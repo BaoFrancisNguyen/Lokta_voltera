@@ -64,16 +64,33 @@ def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100
     return np.array(time), np.array(rabbit), np.array(fox)
 
 def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_range, delta_range):
+
+    #Le Grid Search est une méthode de recherche systématique qui permet de trouver les meilleurs paramètres pour un modèle.
+
+    #Dans le cadre du modèle Lotka-Volterra, le Grid Search permet de trouver les meilleures valeurs pour les paramètres suivants :
+
+    #alpha : Taux de croissance des lapins (proies)
+    #beta : Taux de prédation des lapins par les renards
+    #gamma: Taux de mortalité naturelle des renards
+    #delta : Taux de croissance des renards grâce à la chasse des lapins
+
     #But : Trouver les meilleurs paramètres qui minimisent l'erreur
+    #Avantage : Teste toutes les combinaisons sans oublier aucune possibilité
+    #Limite : Peut être lent si les plages de valeurs sont très larges
+
     #Comment :
         #On teste plusieurs combinaisons de paramètres grâce à product
         #Pour chaque combinaison, on simule les populations et on calcule la MSE
         #On garde les paramètres qui donnent la plus petite MSE
         #Pourquoi : Pour obtenir des résultats plus proches des données réelles
+
     best_params = None
     best_mse = float('inf')
+
+    #La fonction product() génère toutes les combinaisons possibles des paramètres
     
     for alpha, beta, gamma, delta in product(alpha_range, beta_range, gamma_range, delta_range):
+        
         _, simulated_prey, simulated_predator = simulate_lotka_volterra(alpha, beta, gamma, delta)
         
         #ajustement de la taille des données simulées

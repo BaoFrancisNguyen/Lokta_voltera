@@ -18,6 +18,10 @@ def load_csv_data(file_path):
 
 #fonction pour calculer la MSE
 def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
+
+    #But : Mesurer l'écart entre les données réelles et celles simulées
+    #Comment : On calcule la Moyenne des Carrés des Écarts (MSE) pour les lapins et les renards
+    #Pourquoi : Plus la MSE est basse, plus la simulation est proche de la réalité
     try:
         mse_lapin = np.mean((real_lapin - simulated_lapin) ** 2)
         mse_renard = np.mean((real_renard - simulated_renard) ** 2)
@@ -27,6 +31,11 @@ def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
     
 #fonction de simulation de lotka volterra
 def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100_000):
+
+    #But : Simuler l'évolution des populations de lapins et de renards
+    #Comment : Utilisation des équations de Lotka-Volterra avec des paramètres alpha, beta, gamma et delta
+    #Pourquoi : Pour comprendre les interactions entre les deux populations
+
     rabbit = [1]
     fox = [2]
     time = [0]
@@ -42,6 +51,12 @@ def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100
     return np.array(time), np.array(rabbit), np.array(fox)
 
 def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_range, delta_range):
+    #But : Trouver les meilleurs paramètres qui minimisent l'erreur
+    #Comment :
+        #On teste plusieurs combinaisons de paramètres grâce à product
+        #Pour chaque combinaison, on simule les populations et on calcule la MSE
+        #On garde les paramètres qui donnent la plus petite MSE
+        #Pourquoi : Pour obtenir des résultats plus proches des données réelles
     best_params = None
     best_mse = float('inf')
     

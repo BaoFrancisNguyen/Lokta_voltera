@@ -17,7 +17,7 @@ def load_csv_data(file_path):
         raise IOError(f"Erreur lors du chargement du fichier CSV : {e}")
 
 #fonction pour calculer la MSE
-def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
+
 
     #Mean Squared Error (Erreur Quadratique Moyenne)
 
@@ -34,10 +34,28 @@ def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
     # MSE = (erreur_T0 + erreur_T1 + ... + erreur_Tn) / n
     #
     # On fait la même chose pour les renards
-
+    #simulated_lapin = np.array(simulated_lapin)*1000
+    #simulated_renard = np.array(simulated_renard)*1000
+    #print(real_lapin)
+    #print(simulated_lapin)
+    #print(real_renard)
+    #print(simulated_renard)
+    
+    # Fonction pour calculer la MSE avec mise à l'échelle automatique
+def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
     try:
-        mse_lapin = np.mean((real_lapin - simulated_lapin) ** 2)
-        mse_renard = np.mean((real_renard - simulated_renard) ** 2)
+        # Calcul du facteur de mise à l'échelle
+        scale_factor_lapin = np.max(real_lapin) / np.max(simulated_lapin)
+        scale_factor_renard = np.max(real_renard) / np.max(simulated_renard)
+        
+        # Mise à l'échelle des données simulées
+        simulated_lapin_scaled = simulated_lapin * scale_factor_lapin
+        simulated_renard_scaled = simulated_renard * scale_factor_renard
+        
+        # Calcul de la MSE
+        mse_lapin = np.mean((real_lapin - simulated_lapin_scaled) ** 2)
+        mse_renard = np.mean((real_renard - simulated_renard_scaled) ** 2)
+        
         return mse_lapin, mse_renard
     except Exception as e:
         raise ValueError(f"Erreur dans le calcul du MSE : {e}")
@@ -54,6 +72,8 @@ def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100
     time = [0]
     
     for _ in range(iterations):
+        
+        # fonctions analytiques transformées en équations discrètes / méthode d'Euler
         new_rabbit = (rabbit[-1] * (alpha - beta * fox[-1])) * step + rabbit[-1]
         new_fox = (fox[-1] * (delta * rabbit[-1] - gamma)) * step + fox[-1]
         

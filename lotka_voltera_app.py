@@ -40,6 +40,8 @@ print(f"Meilleurs paramètres : {best_params} avec MSE : {best_mse:.2f}")
 time_opt, rabbit_opt, fox_opt = simulate_lotka_volterra(best_params['alpha'], best_params['beta'], best_params['gamma'], best_params['delta'], step, iterations)
 
 # Visualisation des résultats
+#Comparaison visuelle entre les données simulées et réelles
+#Pourquoi : Permet de voir rapidement si la simulation reflète bien la réalité
 plt.figure(figsize=(15, 6))
 plt.plot(time_opt, rabbit_opt, label='Lapins (Optimisés)', color='blue')
 plt.plot(time_opt, fox_opt, label='Renards (Optimisés)', color='red')

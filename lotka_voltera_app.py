@@ -51,6 +51,7 @@ plt.legend()
 plt.title('Évolution des populations de lapins et de renards (Optimisées vs Réelles)')
 plt.show()
 
+#observation: les résultats données simulées et les données réelles ne sont pas à la même échelle
 
 
 

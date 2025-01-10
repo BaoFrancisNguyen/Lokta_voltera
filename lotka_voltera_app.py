@@ -8,7 +8,7 @@ alpha = 2/3
 beta = 4/3
 gamma = 1
 delta = 1
-step = 0.01
+step = 0.001
 iterations = 100_000
 
 # Chargement des données réelles

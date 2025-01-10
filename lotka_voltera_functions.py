@@ -39,4 +39,20 @@ def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100
         time.append(time[-1] + step)
     
     return np.array(rabbit), np.array(fox)
+
+def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_range, delta_range):
+    best_params = {}
+    best_mse = float('inf')
+    
+    for alpha, beta, gamma, delta in product(alpha_range, beta_range, gamma_range, delta_range):
+        simulated_prey, simulated_predator = simulate_lotka_volterra(alpha, beta, gamma, delta)
+        mse_prey = np.mean((real_prey - simulated_prey[:len(real_prey)]) ** 2)
+        mse_predator = np.mean((real_predator - simulated_predator[:len(real_predator)]) ** 2)
+        total_mse = mse_prey + mse_predator
+        
+        if total_mse < best_mse:
+            best_mse = total_mse
+            best_params = {'alpha': alpha, 'beta': beta, 'gamma': gamma, 'delta': delta}
+    
+    return best_params, best_mse
     

@@ -68,7 +68,7 @@ def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_r
         mse_prey = np.mean((real_prey[:min_length] - simulated_prey[:min_length]) ** 2)
         mse_predator = np.mean((real_predator[:min_length] - simulated_predator[:min_length]) ** 2)
         total_mse = mse_prey + mse_predator
-        
+        #mise à jour des meilleurs paramètres
         if total_mse < best_mse:
             best_mse = total_mse
             best_params = {

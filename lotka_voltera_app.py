@@ -28,6 +28,7 @@ print(f"MSE Lapins : {mse_rabbit:.2f}")
 print(f"MSE Renards : {mse_fox:.2f}")
 
 # Optimisation des paramètres avec Grid Search
+#On crée des listes de valeurs possibles pour chaque paramètre
 alpha_range = np.linspace(0.1, 1.0, 5)
 beta_range = np.linspace(0.1, 1.0, 5)
 gamma_range = np.linspace(0.1, 1.0, 5)

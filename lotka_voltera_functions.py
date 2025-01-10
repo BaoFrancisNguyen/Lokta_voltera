@@ -38,7 +38,7 @@ def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100
         fox.append(new_fox)
         time.append(time[-1] + step)
     
-    return np.array(rabbit), np.array(fox)
+    return np.array(time), np.array(rabbit), np.array(fox)
 
 def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_range, delta_range):
     best_params = {}

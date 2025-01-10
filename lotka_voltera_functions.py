@@ -29,7 +29,7 @@ def load_csv_data(file_path):
     #Exemple pour les lapins : erreur = real_lapin - simulated_lapin
     #On élève cette différence au carré pour éviter les annulations positives et négatives (erreur au carré)
     # pour chaque temps, on calcule la moyenne des erreurs au carré pour obtenir la MSE
-    # exemple T0: erreur = (real_lapin[0] - simulated_lapin[0]) ** 2
+    # exemple T0: erreur = (real_lapin[0] - simulated_lapin[0]) ** 244
     # exemple T1: erreur = (real_lapin[1] - simulated_lapin[1]) ** 2
     # MSE = (erreur_T0 + erreur_T1 + ... + erreur_Tn) / n
     #
@@ -67,12 +67,13 @@ def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100
     #Comment : Utilisation des équations de Lotka-Volterra avec des paramètres alpha, beta, gamma et delta
     #Pourquoi : Pour comprendre les interactions entre les deux populations
 
+    # on pose les conditions de cauchy
     rabbit = [1]
     fox = [2]
     time = [0]
     
     for _ in range(iterations):
-        
+
         # fonctions analytiques transformées en équations discrètes / méthode d'Euler
         new_rabbit = (rabbit[-1] * (alpha - beta * fox[-1])) * step + rabbit[-1]
         new_fox = (fox[-1] * (delta * rabbit[-1] - gamma)) * step + fox[-1]
@@ -104,6 +105,27 @@ def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_r
         #On garde les paramètres qui donnent la plus petite MSE
         #Pourquoi : Pour obtenir des résultats plus proches des données réelles
 
+# def grid_search_lotka():
+    #alphas = numpy.linspace(0, 1, 100)
+    #betas = numpy.linspace(0, 1, 100)
+    #gammas = numpy.linspace(0, 1, 100)
+    #deltas = numpy.linspace(0, 1, 100)
+
+    #best_alpha, best_beta, best_gamma, best_delta = None, None, None, None
+    #best_rmse = float('inf') # initialisation de la RMSE à l'infini
+
+    #for alpha, beta, gamma, delta in intertools.product(alphas, betas, gammas, deltas):
+     #time, rabbit, fox = simulate_lotka_volterra(alpha, beta, gamma, delta)
+        #rmse_rabbit = rmse(rabbit, real_rabbit)
+        #rmse_fox = rmse(fox, real_fox)
+        #total_rmse = rmse_rabbit + rmse_fox
+        #if total_rmse < best_rmse:
+            #best_rmse = total_rmse
+            #best_alpha, best_beta, best_gamma, best_delta = alpha, beta, gamma, delta
+
+    #return best_alpha, best_beta, best_gamma, best_delta, best_rmse
+
+
     best_params = None
     best_mse = float('inf')
 
@@ -129,4 +151,12 @@ def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_r
             }
     
     return best_params, best_mse
-    
+
+
+
+# rmse = np.sqrt(mse)
+# rmse_rabbit = np.sqrt(mse_rabbit)
+# rmse_fox = np.sqrt(mse_fox)
+
+# print(f"RMSE Lapins : {rmse_rabbit:.2f}")
+# print(f"RMSE Renards : {rmse_fox:.2f}")

@@ -2,10 +2,6 @@ import numpy as np
 import pandas as pd
 
 
-
-import numpy as np
-import pandas as pd
-
 # Fonction pour charger les données réelles depuis un fichier CSV
 def load_csv_data(file_path):
     try:
@@ -27,4 +23,20 @@ def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
         return mse_lapin, mse_renard
     except Exception as e:
         raise ValueError(f"Erreur dans le calcul du MSE : {e}")
-
+    
+# Fonction de simulation du modèle de Lotka-Volterra
+def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100_000):
+    rabbit = [1]
+    fox = [2]
+    time = [0]
+    
+    for _ in range(iterations):
+        new_rabbit = (rabbit[-1] * (alpha - beta * fox[-1])) * step + rabbit[-1]
+        new_fox = (fox[-1] * (delta * rabbit[-1] - gamma)) * step + fox[-1]
+        
+        rabbit.append(new_rabbit)
+        fox.append(new_fox)
+        time.append(time[-1] + step)
+    
+    return np.array(rabbit), np.array(fox)
+    

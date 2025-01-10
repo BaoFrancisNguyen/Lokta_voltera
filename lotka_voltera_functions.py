@@ -3,12 +3,12 @@ import pandas as pd
 from itertools import product
 
 
-# Fonction pour charger les données réelles depuis un fichier CSV
+#fonction pour charger les données réelles depuis un fichier CSV
 def load_csv_data(file_path):
     try:
         data = pd.read_csv(file_path)
         
-        # Vérifie que les colonnes nécessaires sont présentes
+        #vérification des colonnes
         if 'date' in data.columns and 'lapin' in data.columns and 'renard' in data.columns:
             return data['date'].values, data['lapin'].values, data['renard'].values
         else:
@@ -16,7 +16,7 @@ def load_csv_data(file_path):
     except Exception as e:
         raise IOError(f"Erreur lors du chargement du fichier CSV : {e}")
 
-# Fonction pour calculer la MSE
+#fonction pour calculer la MSE
 def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
     try:
         mse_lapin = np.mean((real_lapin - simulated_lapin) ** 2)
@@ -25,7 +25,7 @@ def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
     except Exception as e:
         raise ValueError(f"Erreur dans le calcul du MSE : {e}")
     
-# Fonction de simulation du modèle de Lotka-Volterra
+#fonction de simulation de lotka volterra
 def simulate_lotka_volterra(alpha, beta, gamma, delta, step=0.01, iterations=100_000):
     rabbit = [1]
     fox = [2]
@@ -48,7 +48,7 @@ def grid_search_lotka(real_prey, real_predator, alpha_range, beta_range, gamma_r
     for alpha, beta, gamma, delta in product(alpha_range, beta_range, gamma_range, delta_range):
         _, simulated_prey, simulated_predator = simulate_lotka_volterra(alpha, beta, gamma, delta)
         
-        # Ajuster la taille des données simulées
+        #ajustement de la taille des données simulées
         min_length = min(len(real_prey), len(simulated_prey))
         mse_prey = np.mean((real_prey[:min_length] - simulated_prey[:min_length]) ** 2)
         mse_predator = np.mean((real_predator[:min_length] - simulated_predator[:min_length]) ** 2)

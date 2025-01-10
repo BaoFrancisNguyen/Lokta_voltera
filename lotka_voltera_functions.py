@@ -19,9 +19,22 @@ def load_csv_data(file_path):
 #fonction pour calculer la MSE
 def calculate_mse(real_lapin, real_renard, simulated_lapin, simulated_renard):
 
+    #Mean Squared Error (Erreur Quadratique Moyenne)
+
     #But : Mesurer l'écart entre les données réelles et celles simulées
     #Comment : On calcule la Moyenne des Carrés des Écarts (MSE) pour les lapins et les renards
     #Pourquoi : Plus la MSE est basse, plus la simulation est proche de la réalité
+
+    #Pour chaque point de données, on calcule la différence entre la valeur réelle et la valeur simulée.
+    #Exemple pour les lapins : erreur = real_lapin - simulated_lapin
+    #On élève cette différence au carré pour éviter les annulations positives et négatives (erreur au carré)
+    # pour chaque temps, on calcule la moyenne des erreurs au carré pour obtenir la MSE
+    # exemple T0: erreur = (real_lapin[0] - simulated_lapin[0]) ** 2
+    # exemple T1: erreur = (real_lapin[1] - simulated_lapin[1]) ** 2
+    # MSE = (erreur_T0 + erreur_T1 + ... + erreur_Tn) / n
+    #
+    # On fait la même chose pour les renards
+
     try:
         mse_lapin = np.mean((real_lapin - simulated_lapin) ** 2)
         mse_renard = np.mean((real_renard - simulated_renard) ** 2)

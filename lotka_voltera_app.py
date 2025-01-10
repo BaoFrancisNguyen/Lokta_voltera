@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from itertools import product 
 from lotka_voltera_functions import load_csv_data, calculate_mse, simulate_lotka_volterra, grid_search_lotka
 
 # Paramètres initiaux du modèle Lotka-Volterra
@@ -49,5 +50,7 @@ plt.ylabel('Population')
 plt.legend()
 plt.title('Évolution des populations de lapins et de renards (Optimisées vs Réelles)')
 plt.show()
+
+
 
 
